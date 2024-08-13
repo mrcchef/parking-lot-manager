@@ -19,12 +19,12 @@ public class ParkingLot {
 
     // Give me floor number 2
     // I have to return 2nd floor's object
-    public Floor getFloor(int floor_num) {
+    public Floor getFloor(int floorNum) {
         Floor floor = null;
         try {
-            floor = floors.get(floor_num - 1);
+            floor = floors.get(floorNum - 1);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid Floor Number: " + floor_num + " Current floor size: " + floors.size());
+            System.out.println("Invalid Floor Number: " + floorNum + " Current floor size: " + floors.size());
         } catch (Exception e) {
             System.out.println("Unexpected Error" + e);
         }

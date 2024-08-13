@@ -5,6 +5,7 @@ enum VehicleType {
 }
 
 public class Vehicle {
+
     private VehicleType vehicleType;
     private String color;
     private String registrationNum;

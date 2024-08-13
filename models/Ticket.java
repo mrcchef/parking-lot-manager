@@ -1,15 +1,30 @@
 package models;
 
-import java.security.Timestamp;
+import java.time.Instant;
 
 public class Ticket {
     private String id;
-    private int startTimestamp;
+    private Instant startTimestamp;
+    private int slotNum;
+    private int floorNum;
 
-    Ticket(String id,int startTimestamp)
-    {
-        this.id=id;
-        this.startTimestamp=startTimestamp;
+    public Ticket(String id, Instant startTimestamp, int slotNum, int floorNum) {
+        this.id = id;
+        this.startTimestamp = startTimestamp;
+        this.slotNum = slotNum;
+        this.floorNum = floorNum;
+    }
+
+    public int getFloorNum() {
+        return floorNum;
+    }
+
+    public int getSlotNum() {
+        return slotNum;
+    }
+
+    public String getId() {
+        return id;
     }
 
 }
