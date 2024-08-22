@@ -1,10 +1,12 @@
 import java.time.Instant;
+import java.util.List;
 
 import models.Floor;
 import models.ParkingLot;
 import models.Slot;
 import models.Ticket;
 import models.Vehicle;
+import models.VehicleType;
 
 public class ParkingLotManager {
     private ParkingLot parkingLot;
@@ -18,10 +20,11 @@ public class ParkingLotManager {
     Ticket park(Vehicle vehicle) {
         Ticket ticket = null;
         // step 1) Find the free slot for the vehicle
-        System.out.println("Finding free slot for vehicle Type" + vehicle.getVehicleType());
+        System.out.println("Finding free slot for vehicle Type: " + vehicle.getVehicleType());
         Slot freeSlot = parkingLot.getFreeSlot(vehicle.getVehicleType());
         if (freeSlot != null) {
-            System.out.println("Occupying the free slot: " + freeSlot.getSlotNum());
+            System.out.println("Occupying the free slot where Floor num: " + freeSlot.getFloorNum() + " and Slot num: "
+                    + freeSlot.getSlotNum());
             // step 2) occpuy that slot
             freeSlot.setIsFree(false);
 
@@ -30,7 +33,8 @@ public class ParkingLotManager {
             // Format: <parking_lot_id>_<floor_no>_<slot_no>
             ticketId.append(parkingLot.getId()).append("_").append(freeSlot.getFloorNum()).append("_")
                     .append(freeSlot.getSlotNum());
-            ticket = new Ticket(ticketId.toString(), Instant.now(), freeSlot.getSlotNum(), freeSlot.getFloorNum());
+            ticket = new Ticket(ticketId.toString(), Instant.now(), freeSlot.getSlotNum(),
+                    freeSlot.getFloorNum());
 
             System.out.println("Created ticket with ticket id: " + ticket.getId());
         }
@@ -51,6 +55,54 @@ public class ParkingLotManager {
 
         System.out.println("Unparked the vehicle");
         return true;
+    }
+
+    void displayFloorWiseFreeSlotsCnt(VehicleType vehicleType) {
+        List<Floor> floors = this.parkingLot.getFloors();
+        for (int i = 0; i < floors.size(); i++) {
+            System.out.println("Floor Number: " + i);
+            List<Slot> slots = floors.get(i).getSlots();
+
+            int truckFreeSlotsCnt = 0;
+            int carFreeSlotsCnt = 0;
+            int bikeFreeSlotsCnt = 0;
+
+            for (int j = 0; j < slots.size(); j++) {
+                if (!slots.get(j).isSlotFree())
+                    continue;
+
+                if (slots.get(j).getVehicleType() == VehicleType.TRUCK)
+                    truckFreeSlotsCnt++;
+                else if (slots.get(j).getVehicleType() == VehicleType.CAR)
+                    carFreeSlotsCnt++;
+                else if (slots.get(j).getVehicleType() == VehicleType.BIKE)
+                    bikeFreeSlotsCnt++;
+
+            }
+
+            System.out.println("Floor Cnt: " + i);
+            System.out.println("Free Truck Slots cnt: " + truckFreeSlotsCnt);
+            System.out.println("Free Car Slots cnt: " + carFreeSlotsCnt);
+            System.out.println("Free Bike Slots cnt: " + bikeFreeSlotsCnt);
+        }
+    }
+
+    void displayFloorWiseOccupiedSlot(VehicleType vehicleType) {
+        List<Floor> floors = this.parkingLot.getFloors();
+        for (int i = 0; i < floors.size(); i++) {
+            System.out.println("Floor Number: " + i);
+            List<Slot> slots = floors.get(i).getSlots();
+            int freeSlotsCnt = 0;
+            for (int j = 0; j < slots.size(); j++) {
+                if (!slots.get(j).isSlotFree())
+                    continue;
+
+                freeSlotsCnt += 1;
+            }
+
+            System.out.println("Free Slots cnt: " + freeSlotsCnt);
+
+        }
     }
 
 }

@@ -6,7 +6,7 @@ public class ParkingLot {
     private String id;
     private List<Floor> floors;
 
-    ParkingLot(String id, List<Floor> floors) {
+    public ParkingLot(String id, List<Floor> floors) {
         this.id = id;
         this.floors = floors;
     }
@@ -22,7 +22,7 @@ public class ParkingLot {
     public Floor getFloor(int floorNum) {
         Floor floor = null;
         try {
-            floor = floors.get(floorNum - 1);
+            floor = floors.get(floorNum);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Floor Number: " + floorNum + " Current floor size: " + floors.size());
         } catch (Exception e) {
@@ -41,5 +41,9 @@ public class ParkingLot {
         }
 
         return null;
+    }
+
+    public List<Floor> getFloors() {
+        return this.floors;
     }
 }

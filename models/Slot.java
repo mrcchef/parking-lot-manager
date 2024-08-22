@@ -6,11 +6,11 @@ public class Slot {
     private boolean isFree;
     private int floorNum;
 
-    Slot(int slotNum, VehicleType vehicleType,int floorNum) {
+    public Slot(int slotNum, VehicleType vehicleType, int floorNum) {
         this.slotNum = slotNum;
         this.vehicleType = vehicleType;
         this.isFree = true;
-        this.floorNum=floorNum;
+        this.floorNum = floorNum;
     }
 
     public int getSlotNum() {
@@ -29,7 +29,7 @@ public class Slot {
         this.isFree = isFree;
     }
 
-    public int getFloorNum(){
+    public int getFloorNum() {
         return floorNum;
     }
 

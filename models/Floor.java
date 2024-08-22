@@ -10,7 +10,7 @@ public class Floor {
     // 1,2 index: Bike
     // rest index: Car
 
-    Floor(int floorNum, List<Slot> slots) {
+    public Floor(int floorNum, List<Slot> slots) {
         this.floorNum = floorNum;
         this.slots = slots;
     }
@@ -23,20 +23,20 @@ public class Floor {
     // 1 to n, slotNum
     // 0 to n-1
     public Slot getSlot(int slotNum) throws IndexOutOfBoundsException {
-        return slots.get(slotNum - 1);
+        return slots.get(slotNum);
     }
 
     public Slot getFreeSlot(VehicleType vehicleType) {
         int startSlotNum, endSlotNum;
         if (VehicleType.TRUCK == vehicleType) {
-            startSlotNum = 1;
-            endSlotNum = 1;
+            startSlotNum = 0;
+            endSlotNum = 0;
         } else if (VehicleType.BIKE == vehicleType) {
-            startSlotNum = 2;
-            endSlotNum = 3;
+            startSlotNum = 1;
+            endSlotNum = 2;
         } else {
-            startSlotNum = 4;
-            endSlotNum = slots.size();
+            startSlotNum = 3;
+            endSlotNum = slots.size() - 1;
         }
 
         for (int slotNum = startSlotNum; slotNum <= endSlotNum; slotNum++) {
@@ -46,5 +46,9 @@ public class Floor {
         }
 
         return null;
+    }
+
+    public List<Slot> getSlots() {
+        return this.slots;
     }
 }

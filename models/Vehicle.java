@@ -1,8 +1,5 @@
 package models;
 
-enum VehicleType {
-    CAR, BIKE, TRUCK
-}
 
 public class Vehicle {
 
@@ -10,7 +7,7 @@ public class Vehicle {
     private String color;
     private String registrationNum;
 
-    Vehicle(VehicleType vehicleType, String color, String registrationNum) {
+    public Vehicle(VehicleType vehicleType, String color, String registrationNum) {
         this.vehicleType = vehicleType;
         this.color = color;
         this.registrationNum = registrationNum;
